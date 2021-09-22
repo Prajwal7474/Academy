@@ -6,6 +6,19 @@ public class Student {
 	private String student_name;
 	private int mob_no;
 	private String batch;
+	
+	
+	
+	
+	
+	
+	public Student(int student_id, String student_name, int mob_no, String batch) {
+		super();
+		this.student_id = student_id;
+		this.student_name = student_name;
+		this.mob_no = mob_no;
+		this.batch = batch;
+	}
 	public int getStudent_id() {
 		return student_id;
 	}
@@ -30,6 +43,16 @@ public class Student {
 	public void setBatch(String batch) {
 		this.batch = batch;
 	}
+	
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
+	
+	
+	
 	
 	
 	
