@@ -1,6 +1,10 @@
 package com.controller;
+
+import com.model.Stud_Test;
 import com.model.Student;
 import java.util.Scanner;
+
+import com.dao.Stud_Testdaoimplimentation;
 import com.dao.Studentdao;
 import com.dao.Studentdaoimplimentation;
 
@@ -10,13 +14,14 @@ public class MainMethod {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		Studentdaoimplimentation sdao=new Studentdaoimplimentation();
+		Stud_Testdaoimplimentation stest=new Stud_Testdaoimplimentation();
 				
 				
 		do
 		{
 			System.out.println(" ************* Welcome To Training Academy************");
 			System.out.println("1.Add new student");
-			System.out.println("2.Delete/Deactivate student");
+			System.out.println("2.Delete student");
 			System.out.println("3.Modify student details");
 			System.out.println("4.Add marks of students  ");
 
@@ -31,13 +36,13 @@ public class MainMethod {
 			{
 			case 1:
 				System.out.println("Enter Student_id , Student_name , Mob_no , batch_id ");
-				int sid= sc.nextInt();
-				String nm = sc.nextLine();
-				int mob = sc.nextInt();
-				int batch = sc.nextInt();
-				Student s = new Student(sid,nm,mob,batch);
+				int student_id= sc.nextInt();
+				String student_name = sc.next();
+				int mob_no = sc.nextInt();
+				String batch = sc.next();
+				Student student = new Student(student_id,student_name,mob_no,batch);
 				
-				boolean isinsert = sdao.addStudent(s);
+				boolean isinsert = sdao.addStudent(student);
 				if(isinsert)
 					System.out.println("Record added successfully");
 				else
@@ -45,7 +50,76 @@ public class MainMethod {
 				break;
 
 			case 2:
-			
+				System.out.println("Enter student id ");
+				int sid= sc.nextInt();
+				boolean isdelete = sdao.deleteStudent(sid);
+				if(isdelete)
+					System.out.println("Record deleted successfully");
+				else
+					System.out.println("delete Unsuccessfully");
+				break;
+				
+			case 3:
+				System.out.println("Enter student id to update");
+				int id= sc.nextInt();
+				System.out.println("Enter new name,mobile,batch");
+				student_name = sc.next();
+				 mob_no = sc.nextInt();
+				 batch = sc.next();
+				Student s1 = new Student(id,student_name,mob_no,batch);
+				boolean isupdate=sdao.updateStudent(s1);
+				if(isupdate)
+					System.out.println("Record updated successfully");
+				else
+					System.out.println("Update Unsuccessfully");
+				break;
+				
+			case 4:
+				System.out.println("Enter stud_id , test_id , marks");
+				int stud_id= sc.nextInt();
+				int test_id = sc.nextInt();
+				int marks = sc.nextInt();
+				Stud_Test stud_test = new Stud_Test(stud_id,test_id,marks);
+				
+			     boolean isadded = stest.addStudentTestMarks(stud_test);
+				if(isadded)
+					System.out.println("Record added successfully");
+				else
+					System.out.println("Insert Unsuccessfully");
+				break;
+				
+				
+			case 5:
+				
+				  System.out.println("Enter student marks"); 
+				 int updatemarks= sc.nextInt();
+			    boolean isupdateStudent = stest.updateTest(updatemarks);
+				if(isupdateStudent)
+					  System.out.println("Record updated successfully");
+				  else
+				 
+					System.out.println("updated Unsuccessfully");
+				break;
+				
+			case 6:
+				System.out.println("enter delete marks");
+				int deletemarks=sc.nextInt();
+				boolean isdeleted = sdao.deletedmarks(deletemarks);
+				if(isdeleted)
+					System.out.println("marks deleted successfully");
+				else
+					System.out.println("marks deleted unsuccessfully");
+				break;
+				
+				
+				
+				case 7:
+					System.out.println("Exit");
+					
+					
+				
+				
+				
 			}	
 			if(ch==0)
 				break;

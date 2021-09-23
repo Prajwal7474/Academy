@@ -7,11 +7,6 @@ public class Student {
 	private int mob_no;
 	private String batch;
 	
-	
-	
-	
-	
-	
 	public Student(int student_id, String student_name, int mob_no, String batch) {
 		super();
 		this.student_id = student_id;
