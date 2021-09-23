@@ -18,6 +18,10 @@ public class Mysql_Configuration {
 			connection =(Connection) DriverManager.getConnection(URL,USER,PASS);
 			return connection;
 		}
+		
 
 
-	}
+}
+
+
+

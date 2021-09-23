@@ -35,12 +35,12 @@ public class MainMethod {
 			switch (ch) 
 			{
 			case 1:
-				System.out.println("Enter Student_id , Student_name , Mob_no , batch_id ");
+				System.out.println("Enter Student_id , Student_name , Mob_no , batch ");
 				int student_id= sc.nextInt();
 				String student_name = sc.next();
-				int mob_no = sc.nextInt();
-				String batch = sc.next();
-				Student student = new Student(student_id,student_name,mob_no,batch);
+				long mob_no = sc.nextInt();
+			    int batchid = sc.nextInt();
+				Student student = new Student(student_id,student_name,mob_no,batchid);
 				
 				boolean isinsert = sdao.addStudent(student);
 				if(isinsert)
@@ -65,8 +65,8 @@ public class MainMethod {
 				System.out.println("Enter new name,mobile,batch");
 				student_name = sc.next();
 				 mob_no = sc.nextInt();
-				 batch = sc.next();
-				Student s1 = new Student(id,student_name,mob_no,batch);
+				 batchid = sc.nextInt();
+				Student s1 = new Student(id,student_name,mob_no,batchid);
 				boolean isupdate=sdao.updateStudent(s1);
 				if(isupdate)
 					System.out.println("Record updated successfully");
@@ -116,7 +116,7 @@ public class MainMethod {
 				case 7:
 					System.out.println("Exit");
 					
-					
+				
 				
 				
 				

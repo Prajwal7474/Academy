@@ -2,12 +2,14 @@ package com.dao;
 
 import com.configuration.Mysql_Configuration;
 import com.model.Stud_Test;
-
+import com.model.Student;
 
 import java.sql.Connection;
 	import java.sql.PreparedStatement;
-		import java.sql.SQLException;
-	import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 	public class Stud_Testdaoimplimentation implements Stud_Testdao
@@ -51,6 +53,74 @@ import java.sql.Connection;
 			}
 			return false;
 		}
+		
+		
+		
+		
+		
+		
+
+		public boolean deletedStudent(int id) {
+			try (Connection con = Mysql_Configuration.getConnection();
+					PreparedStatement pst = con.prepareStatement("delete from student where studentid=: where studentmarks=:")) {
+				pst.setInt(1,id);
+				pst.setInt(2, marks);
+			   pst.executeUpdate();
+				return true;
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		public boolean updatedStudent(Student s) {
+			try (Connection con = Mysql_Configuration.getConnection();
+					PreparedStatement pst = con.prepareStatement("update student set studentname=: where studentid=: where studentmarks=:")) {
+				pst.setInt(1, s.getStudent_id());
+				pst.setInt(2, s.getmarks());
+
+				pst.executeUpdate();
+				return true;
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+		
+		
+		
+		
+		
+		public List<Student> getAllStudent() 
+		{
+			ArrayList<Student> studentlist = new ArrayList<>();
+			
+			try (Connection con = Mysql_Configuration.getConnection();
+					PreparedStatement pst = con.prepareStatement("select * from role")) {
+
+				ResultSet s = pst.executeQuery();
+
+				while (s.next()) {
+					Student s = new Student();
+					s.setStudent_id(s.getInt(1));
+					s.setmarks(s.getInt(2));
+					studentlist.add(s);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return studentlist;
+		}
+
+
+
 
 
 		@Override
