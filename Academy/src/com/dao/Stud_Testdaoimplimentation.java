@@ -28,7 +28,7 @@ import java.util.List;
 			{
 			
 					try(Connection con=Mysql_Configuration.getConnection();
-							PreparedStatement pst=con.prepareStatement("insert into stud_test values(?,?,?,?,?)"))
+							PreparedStatement pst=con.prepareStatement("insert into stud_test values(?,?,?)"))
 					{
 						
 						
@@ -53,118 +53,112 @@ import java.util.List;
 			}
 			return false;
 		}
-		
-		
-		
-		
-		
-		
 
-		public boolean deletedStudent(int id) {
-			try (Connection con = Mysql_Configuration.getConnection();
-					PreparedStatement pst = con.prepareStatement("delete from student where studentid=: where studentmarks=:")) {
-				pst.setInt(1,id);
-				pst.setInt(2, marks);
-			   pst.executeUpdate();
-				return true;
 
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		
+	
+		public boolean deleteStudentMarks(int id) {
+			 try {
+				 try(Connection con = Mysql_Configuration.getConnection();
+				 PreparedStatement pst = con.prepareStatement("delete from Stud_Test where Stud_id=?"))
+			       {
+					 pst.setInt(1, id);
+					 pst.executeUpdate();
+			    return true;
+			      }
+			    } catch (SQLException ex) {
+			        ex.printStackTrace();
+			    }
 			return false;
 		}
 
-		public boolean updatedStudent(Student s) {
-			try (Connection con = Mysql_Configuration.getConnection();
-					PreparedStatement pst = con.prepareStatement("update student set studentname=: where studentid=: where studentmarks=:")) {
-				pst.setInt(1, s.getStudent_id());
-				pst.setInt(2, s.getmarks());
-
-				pst.executeUpdate();
-				return true;
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return false;
+		public boolean updateStudentMarks(Stud_Test st) {
+			try {
+		    	Connection con = Mysql_Configuration.getConnection();
+		        PreparedStatement pst = con.prepareStatement("update Stud_Test SET marks=? where Stud_id=?");
+		       
+		        pst.setInt(1, st.getMarks());
+				pst.setInt(2,st.getStud_id());
+				
+				 int recordUpdate = pst.executeUpdate();
+			     if(recordUpdate > 0)
+			    	 return true;
+			    
+			    } catch (SQLException ex) {
+			        ex.printStackTrace();
+			    }
+				return false;
 		}
+
 		
+
 		
-		
-		
-		
-		
-		public List<Student> getAllStudent() 
-		{
-			ArrayList<Student> studentlist = new ArrayList<>();
+		 public List<Stud_Test> getAllStudentTest() {
+			try(Connection con= Mysql_Configuration.getConnection();
+					PreparedStatement pst = con.prepareStatement("select * from Stud_Test"))
+			{
+				ArrayList<Stud_Test> studentTestlist = new ArrayList<>();
+				ResultSet r = pst.executeQuery();
+				
+				while(r.next())
+				{
 			
-			try (Connection con = Mysql_Configuration.getConnection();
-					PreparedStatement pst = con.prepareStatement("select * from role")) {
-
-				ResultSet s = pst.executeQuery();
-
-				while (s.next()) {
-					Student s = new Student();
-					s.setStudent_id(s.getInt(1));
-					s.setmarks(s.getInt(2));
-					studentlist.add(s);
+                    Stud_Test st= new Stud_Test();					
+					
+					st.setStud_id(r.getInt(1));
+					st.setTest_id(r.getInt(2));
+					st.setMarks(r.getInt(3));
+					studentTestlist.add(st);
 				}
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return studentTestlist;
 			}
-			return studentlist;
-		}
-
-
-
-
-
-		@Override
-		public boolean deleteTest(int id) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-
-		@Override
-		public boolean updateTest(Stud_Test st) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-
-		@Override
-		public List<Stud_Test> getAllStud_Test() {
-			// TODO Auto-generated method stub
+			catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} 
 			return null;
+		 }
+
+
+
+		@Override
+		public boolean updateTestMarks(Stud_Test st) {
+			// TODO Auto-generated method stub
+			return false;
 		}
 
 
 
 		@Override
-		public boolean updateMarks(int marks) {
+		public boolean deleteMarks(Student marks) {
 			// TODO Auto-generated method stub
 			return false;
 		}
 
-
-
-		@Override
-		public boolean deleteMarks(int marks) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-
-
-		public boolean updateTest(int marks) {
-			// TODO Auto-generated method stub
-			return false;
-		}
 	}
+
+
+
+	
+		
+		
+		
+		
+
+	
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+		
 
 		

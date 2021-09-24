@@ -54,9 +54,9 @@ public class Studentdaoimplimentation implements Studentdao
 	
 	
 	
-	public boolean deletedStudent(int id) {
+	public boolean deleteStudent(int id) {
 		try (Connection con = Mysql_Configuration.getConnection();
-				PreparedStatement pst = con.prepareStatement("delete from student where studentid=: where studentmarks=:")) {
+				PreparedStatement pst = con.prepareStatement("delete from student where studentid=?")) {
 			pst.setInt(1,id);
 		   pst.executeUpdate();
 			return true;
@@ -67,15 +67,19 @@ public class Studentdaoimplimentation implements Studentdao
 		}
 		return false;
 	}
+	
+	
+	
 
-	public boolean updatedStudent(Student s) {
+	public boolean updateStudent(Student s) {
 		try (Connection con = Mysql_Configuration.getConnection();
 				
-				PreparedStatement pst = con.prepareStatement("update student set studentname=: where studentid=: where studentmarks=:")) {
-			pst.setInt(1, s.getStudent_id());
-			pst.setString(2, s.getStudent_name());
+				PreparedStatement pst = con.prepareStatement("update student set studentname=?,mobile=?,batchid=? where studentid=?")) {
 			
+			pst.setString(1, s.getStudent_name());
+			pst.setLong(2, s.getMob_no());
 			pst.setInt(3, s.getBatch());
+			pst.setInt(4, s.getStudent_id());
 			pst.executeUpdate();
 			return true;
 
@@ -96,16 +100,16 @@ public class Studentdaoimplimentation implements Studentdao
 		ArrayList<Student> studentlist = new ArrayList<>();
 		
 		try (Connection con = Mysql_Configuration.getConnection();
-				PreparedStatement pst = con.prepareStatement("select * from role")) {
+				PreparedStatement pst = con.prepareStatement("select * from student")) {
 
-			ResultSet s = pst.executeQuery();
+			ResultSet rs = pst.executeQuery();
 
-			while (s.next()) {
+			while (rs.next()) {
 				Student s = new Student();
 				
-				s.setStudent_id(s.getInt(1));
-				s.setStudent_name(s.getString(2));
-				s.setsBatch(s.getInt(3));
+				s.setStudent_id(rs.getInt(1));
+				s.setStudent_name(rs.getString(2));
+				s.setBatch(rs.getInt(3));
 				studentlist.add(s);
 			}
 
@@ -130,33 +134,7 @@ public class Studentdaoimplimentation implements Studentdao
 
 	
 
-	@Override
-	public boolean deleteStudent(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean updateStudent(Student s) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public List<Student> getAllStudent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public boolean deletedmarks(int marks) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
+	
 	
 }
 

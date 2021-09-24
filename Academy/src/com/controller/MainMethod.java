@@ -75,11 +75,11 @@ public class MainMethod {
 				break;
 				
 			case 4:
-				System.out.println("Enter stud_id , test_id , marks");
-				int stud_id= sc.nextInt();
-				int test_id = sc.nextInt();
-				int marks = sc.nextInt();
-				Stud_Test stud_test = new Stud_Test(stud_id,test_id,marks);
+				System.out.println("Enter Stud_id , test_id , marks");
+				int Stud_id= sc.nextInt();
+				int Test_id = sc.nextInt();
+				int Marks = sc.nextInt();
+				Stud_Test stud_test = new Stud_Test();
 				
 			     boolean isadded = stest.addStudentTestMarks(stud_test);
 				if(isadded)
@@ -91,10 +91,16 @@ public class MainMethod {
 				
 			case 5:
 				
-				  System.out.println("Enter student marks"); 
-				 int updatemarks= sc.nextInt();
-			    boolean isupdateStudent = stest.updateTest(updatemarks);
-				if(isupdateStudent)
+				  System.out.println("Enter student id to update"); 
+				   Stud_id= sc.nextInt();
+				
+				 System.out.println("enter new marks to update");
+				 Marks = sc.nextInt();
+				 stud_test = new Stud_Test();
+					
+			    boolean isupdateStudent = stest.updateTestMarks(stud_test);
+			    		
+			    if(isupdateStudent)
 					  System.out.println("Record updated successfully");
 				  else
 				 
@@ -102,22 +108,18 @@ public class MainMethod {
 				break;
 				
 			case 6:
-				System.out.println("enter delete marks");
-				int deletemarks=sc.nextInt();
-				boolean isdeleted = sdao.deletedmarks(deletemarks);
-				if(isdeleted)
-					System.out.println("marks deleted successfully");
-				else
-					System.out.println("marks deleted unsuccessfully");
-				break;
+				System.out.println("enter student id to delete marks");
+				id=sc.nextInt();
+				student=new Student();
 				
-				
-				
-				case 7:
-					System.out.println("Exit");
-					
-				
-				
+				boolean isdeleteStudent = stest.deleteMarks(student);
+	    		
+			    if(isdeleteStudent)
+					  System.out.println("Record deleted successfully");
+				  else
+				 
+					System.out.println("deleted Unsuccessfully");
+				break;	
 				
 				
 			}	

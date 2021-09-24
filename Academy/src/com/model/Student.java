@@ -14,11 +14,14 @@ public class Student {
 		this.mob_no = mob_no;
 		this.batch = batch;
 	}
+	public Student() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getStudent_id() {
 		return student_id;
 	}
-	public void setStudent_id(int student_id)  {
-		this.student_id = student_id ;
+	public void setStudent_id(int student_id) {
+		this.student_id = student_id;
 	}
 	public String getStudent_name() {
 		return student_name;
@@ -38,23 +41,6 @@ public class Student {
 	public void setBatch(int batch) {
 		this.batch = batch;
 	}
-	
-	
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-	public Object getString(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public Object getInt(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 	
 	
 	
